@@ -3,6 +3,16 @@ $string-padding: 8px; //main padding for content
 $content-padding: 20px; //main padding for structure
 $border-radius: 3px;
 
+$iframe-width: 420px;
+$min-iframe-width: 320px;
+$iframe-height: $iframe-width / 1.8; //233px
+$min-iframe-height: $min-iframe-width / 1.8; //180px
+
 //font
 $default-font: 'Roboto', sans-serif;
 $line-height-default: 1.2;
+
+
+//media
+$max-small: 668px;
+$min-small: $max-small - 1;

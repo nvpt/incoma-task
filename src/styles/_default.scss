@@ -26,3 +26,10 @@ button {
 router-outlet {
     display: none;
 }
+
+iframe {
+    width: $iframe-width;
+    min-width: $min-iframe-width;
+    height: $iframe-height;
+    min-height: $min-iframe-height;
+}

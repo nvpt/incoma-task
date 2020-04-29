@@ -35,14 +35,19 @@
 .list {
     display: grid;
     grid-gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax($iframe-width + 20, 1fr));
     padding: $content-padding;
     overflow: auto;
+
+    @media(max-width: $max-small){
+        grid-template-columns: 1fr;
+    }
 }
 
 .filter {
     width: 300px;
 
-    @media (max-width: 668px) {
+    @media (max-width: $max-small) {
         width: 100%;
     }
 

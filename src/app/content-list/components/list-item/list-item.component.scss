@@ -1,5 +1,10 @@
+@import 'src/styles/variables';
 .list-item {
     display: inline-flex;
+
+    @media(max-width: $max-small){
+        display: block;
+    }
 }
 
 .star {
@@ -16,5 +21,17 @@
     &:active,
     &.selected {
         color: #ffe600;
+    }
+}
+
+
+iframe {
+    @media(max-width: $max-small){
+        max-width: 100%;
+        min-width: initial;
+        width: initial;
+        max-height: 100%;
+        height: initial;
+        min-height: initial;
     }
 }
