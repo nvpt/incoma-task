@@ -1,8 +1,31 @@
 <div class="content-list">
-    <h1>Список</h1>
-    <app-list-item></app-list-item>
-    <app-list-item></app-list-item>
-    <app-list-item></app-list-item>
-    <app-list-item></app-list-item>
-    <app-list-item></app-list-item>
+
+    <div class="top-panel">
+        <h1>Список</h1>
+    </div>
+
+    <div class="control-panel">
+        <div class="filter">
+            <label><input type="text"
+                          placeholder="Search"></label>
+        </div>
+        <div class="buttons">
+
+            <label class="checkbox-label"><input type="checkbox"
+                                                 class="checkbox-btn">Only favorites</label>
+            <button class="g-btn g-btn-error">Clear favorites</button>
+        </div>
+    </div>
+
+    <div class="list">
+
+        <!--        <div *ngIf="false">-->
+        <!--            <app-list-item *ngFor="let video of videos"-->
+        <!--                           [video]="video"></app-list-item>-->
+        <!--        </div>-->
+
+        <!--        <app-list-item></app-list-item>-->
+        <!--        <app-list-item></app-list-item>-->
+
+    </div>
 </div>

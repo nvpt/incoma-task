@@ -1,0 +1,73 @@
+@import 'src/styles/variables';
+
+:host {
+    display: grid;
+    overflow: hidden;
+    width: 100%;
+}
+
+.content-list {
+    display: grid;
+    grid-template-rows: minmax(60px, auto) minmax(60px, auto) 1fr;
+    overflow: auto;
+    text-align: center;
+}
+
+.top-panel,
+.control-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 $content-padding;
+}
+
+.control-panel {
+    display: grid;
+    grid-row-gap: $content-padding;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-rows: repeat(min(1), 1fr);
+    padding: $content-padding;
+    overflow: auto;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+}
+
+.list {
+    display: grid;
+    grid-gap: 20px;
+    padding: $content-padding;
+    overflow: auto;
+}
+
+.filter {
+    width: 300px;
+
+    @media (max-width: 668px) {
+        width: 100%;
+    }
+
+    label,
+    input {
+        width: 100%;
+    }
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.checkbox-label {
+    display: flex;
+    margin-right: $string-padding * 2;
+    cursor: pointer;
+}
+
+.checkbox-btn {
+    $size: 1.125rem;
+    width: $size;
+    height: $size;
+    margin-right: $string-padding;
+    cursor: pointer;
+}
