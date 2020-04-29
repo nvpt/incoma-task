@@ -1,0 +1,17 @@
+<div class="inline-search">
+
+    <label class="inline-search__label">
+        <input type="text"
+               class="inline-search__input"
+               [ngModel]="search"
+               (ngModelChange)="searchChange.emit($event)"
+               #inputField>
+    </label>
+
+    <span class="material-icons inline-search__icon inline-search__icon"
+          *ngIf="!search?.length; else clearSearch" (click)="focus()">search</span>
+    <ng-template #clearSearch>
+        <span class="material-icons inline-search__icon inline-search__icon"
+              (click)="clear()">close</span>
+    </ng-template>
+</div>
