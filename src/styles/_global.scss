@@ -1,0 +1,16 @@
+@import "variables";
+
+.g-layout {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto 1fr;
+    overflow: auto;
+}
+
+.g-page {
+    overflow: auto;
+}
+
+.g-display-none {
+    display: none!important;
+}
