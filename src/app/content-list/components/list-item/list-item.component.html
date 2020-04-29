@@ -1,10 +1,16 @@
 <div class="list-item">
-    <span class="fav-btn">fav</span>
+    <span class="material-icons star"
+          [class.selected]="selected"
+          (click)="toggle()">
+        {{selected ? 'star' : 'star_outline'}}
+    </span>
 
-    <iframe class="test-frame"
-            width="420"
-            height="315"
-            src=""
-            allowfullscreen>
-    </iframe>
+        <!-- video.id.videoId -->
+        <iframe class="test-frame"
+                width="420"
+                height="315"
+                [src]="sanitizer.bypassSecurityTrustResourceUrl(constants.VIDEO_URL + 'ZxAeAjBBAtA')"
+                allowfullscreen>
+        </iframe>
+
 </div>
