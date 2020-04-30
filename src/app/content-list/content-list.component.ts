@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Subscription} from 'rxjs';
 
 import {VideoI, YoutubeService} from '../services/youtube.service';
@@ -11,6 +11,7 @@ import {StorageService} from '../services/storage.service';
     styleUrls: ['./content-list.component.scss']
 })
 export class ContentListComponent implements OnInit, OnDestroy {
+    @ViewChild('list') list: ElementRef;
     videos: VideoI[] = [];
     filterValue: string = '';
     $videoSub: Subscription;
@@ -34,8 +35,8 @@ export class ContentListComponent implements OnInit, OnDestroy {
         this.$videoSub = this.youtube.getVideoList().subscribe(
             (res) => {
                 console.log('43 >>> res: ', res);
-                
-                this.videos = res.items;
+
+                this.videos = [...this.videos, ...res.items];
                 this.loader.hide();
             },
             () => {
@@ -43,6 +44,13 @@ export class ContentListComponent implements OnInit, OnDestroy {
             },
             () => {
                 this.loader.hide();
+
+                //we need scroll so will load videos until've got it
+                setTimeout(() => {
+                    if(this.list.nativeElement.scrollHeight === this.list.nativeElement.clientHeight){
+                        this.getVideoList();
+                    }
+                }, 0);
             }
         );
     }
@@ -69,5 +77,9 @@ export class ContentListComponent implements OnInit, OnDestroy {
 
     toggleOnlyFavoriteMode(): void {
         this.storageService.toggleOnlyFavoriteMode();
+    }
+
+    cancelScroll():boolean {//todo
+        return this.isShowOnlyFavorite() || this.videos.length >= 30
     }
 }

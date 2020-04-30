@@ -19,7 +19,8 @@
         </div>
     </div>
 
-    <div class="list">
+
+    <div class="list" appInfiniteScroll (onScroll)="getVideoList()" [cancelScroll]="cancelScroll()" #list>
 
         <app-list-item *ngFor="let video of videos | filterItems:filterValue: isShowOnlyFavorite()"
                        [video]="video"
