@@ -7,11 +7,11 @@ import {StorageService} from '../services/storage.service';
 import {VideoI} from '../interfaces/video-interface';
 
 @Component({
-    selector: 'app-content-list',
-    templateUrl: './content-list.component.html',
-    styleUrls: ['./content-list.component.scss']
+    selector: 'app-top-rate-page',
+    templateUrl: './top-rate-page.component.html',
+    styleUrls: ['./top-rate-page.component.scss']
 })
-export class ContentListComponent implements OnInit, OnDestroy {
+export class TopRatePageComponent implements OnInit, OnDestroy {
     @ViewChild('list') list: ElementRef;
     videos: VideoI[] = [];
     filterValue: string = '';
