@@ -22,7 +22,7 @@ export class ContentListComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit(): void {
-        // this.getVideoList();
+        this.getVideoList();
         // this.test();
     }
 

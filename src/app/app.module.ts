@@ -13,10 +13,11 @@ import {InlineSearchComponent} from './components/inline-search/inline-search.co
 import { LoaderComponent } from './components/loader/loader.component';
 import { FilterItemsPipe } from './content-list/pipes/filter-items.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
     declarations: [AppComponent, ContentListComponent, ListItemComponent, InlineSearchComponent, LoaderComponent, FilterItemsPipe],
-    imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, BrowserAnimationsModule, YouTubePlayerModule],
+    imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, BrowserAnimationsModule, YouTubePlayerModule, MatProgressSpinnerModule],
     providers: [],
     bootstrap: [AppComponent]
 })
