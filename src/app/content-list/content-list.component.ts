@@ -1,4 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Subscription} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+
 import {Constants} from '../constants';
 import {VideoI, YoutubeService} from '../services/youtube.service';
 import {LoaderService} from '../services/loader.service';
@@ -9,14 +12,26 @@ import {StorageObjectI} from '../interfaces/storage-object-interface';
     templateUrl: './content-list.component.html',
     styleUrls: ['./content-list.component.scss']
 })
-export class ContentListComponent implements OnInit {
+export class ContentListComponent implements OnInit, OnDestroy {
     videos: VideoI[] = [];
     filterValue: string = '';
+    $videoSub: Subscription;
 
     constructor(private youtube: YoutubeService, private loader: LoaderService) {}
 
     ngOnInit(): void {
-        this.getVideoList();
+        // this.getVideoList();
+        // this.test();
+    }
+
+    ngOnDestroy(): void {
+        this.$videoSub.unsubscribe();
+    }
+
+    test() {
+        this.youtube.test().subscribe((res) => {
+            console.log('26 >>> res: ', res);
+        });
     }
 
     get isShowOnlyFavorite(): boolean {
@@ -33,10 +48,19 @@ export class ContentListComponent implements OnInit {
 
     getVideoList() {
         this.loader.show();
-        this.youtube.getVideoList().subscribe((res) => {
-            this.videos = res.items;
-            this.loader.hide();
-        });
+        this.$videoSub = this.youtube.getVideoList()
+            .subscribe(
+            (res) => {
+                this.videos = res.items;
+                this.loader.hide();
+            },
+            () => {
+                this.loader.hide();
+            },
+            () => {
+                this.loader.hide();
+            }
+        );
     }
 
     isItemFavorite(id: string): boolean {

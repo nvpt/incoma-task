@@ -65,6 +65,7 @@
 
 .checkbox-label {
     display: flex;
+    align-items: center;
     margin-right: $string-padding * 2;
     cursor: pointer;
 }

@@ -5,12 +5,9 @@
         {{favorite ? 'star' : 'star_outline'}}
     </span>
 
-        <!-- video.id.videoId -->
-        <!-- ZxAeAjBBAtA -->
-        <iframe class="test-frame"
-
-                [src]="sanitizer.bypassSecurityTrustResourceUrl(constants.VIDEO_URL + video.id.videoId)"
-                allowfullscreen>
-        </iframe>
+    <!-- video.id.videoId -->
+    <!-- ZxAeAjBBAtA -->
+    <youtube-player class="test-frame"
+                    [videoId]="video?.id?.videoId"></youtube-player>
 
 </div>

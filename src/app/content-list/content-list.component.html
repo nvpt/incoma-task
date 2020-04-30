@@ -17,6 +17,9 @@
             <button class="g-btn g-btn-error"
                     *ngIf="hasFavorite()">Clear favorites
             </button>
+
+
+
         </div>
     </div>
 
@@ -26,5 +29,10 @@
                        [video]="video"
                        (onToggle)="toggle($event, video.id.videoId)"
                        [favorite]="isItemFavorite(video.id.videoId)"></app-list-item>
+
+
+<!--        <app-list-item></app-list-item>-->
+<!--        <app-list-item></app-list-item>-->
+<!--        <app-list-item></app-list-item>-->
     </div>
 </div>
