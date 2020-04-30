@@ -29,9 +29,10 @@ export class StorageService {
     }
 
     toggle(toggledId: string): void {
-        if (this._storageObj.favorite.includes(toggledId)) {
+        if (this._storageObj.favorite && this._storageObj.favorite.includes(toggledId)) {
             this._storageObj.favorite = [...this._storageObj.favorite.filter((id) => id !== toggledId)];
         } else {
+            this._storageObj.favorite = [];
             this._storageObj.favorite.push(toggledId);
         }
 
