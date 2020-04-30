@@ -13,21 +13,17 @@
             <label class="checkbox-label"><input type="checkbox"
                                                  class="checkbox-btn"
                                                  (click)="toggleOnlyFavoriteMode()"
-                                                 [defaultChecked]="isShowOnlyFavorite">Only favorites</label>
-            <button class="g-btn g-btn-error"
-                    *ngIf="hasFavorite()">Clear favorites
+                                                 [defaultChecked]="isShowOnlyFavorite()">Only favorites</label>
+            <button class="g-btn g-btn-error" (click)="clearFavorites()">Clear favorites
             </button>
-
-
-
         </div>
     </div>
 
     <div class="list">
 
-        <app-list-item *ngFor="let video of videos | filterItems:filterValue: isShowOnlyFavorite"
+        <app-list-item *ngFor="let video of videos | filterItems:filterValue: isShowOnlyFavorite()"
                        [video]="video"
-                       (onToggle)="toggle($event, video.id.videoId)"
+                       (onToggle)="toggle(video.id.videoId)"
                        [favorite]="isItemFavorite(video.id.videoId)"></app-list-item>
 
 
