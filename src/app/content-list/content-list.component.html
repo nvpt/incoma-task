@@ -1,7 +1,7 @@
 <div class="content-list">
 
     <div class="top-panel">
-        <h1>Популярные видео. Топ-50.</h1>
+        <h1>Популярные видео. {{videos.length ? 'Топ-' + videos.length : ''}}.</h1>
     </div>
 
     <div class="control-panel">
@@ -24,7 +24,7 @@
     <div class="list"
          appInfiniteScroll
          (onScroll)="getVideoList()"
-         [cancelScroll]="cancelScroll()"
+         [cancelScroll]="cancelAddScroll"
          #list>
 
         <app-list-item *ngFor="let video of videos | filterItems:filterValue: isShowOnlyFavorite()"

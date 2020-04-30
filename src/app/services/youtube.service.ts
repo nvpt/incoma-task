@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
-import {Constants} from '../constants';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {tap} from 'rxjs/operators';
+
+import {Constants} from '../constants';
 import {VideoI} from '../interfaces/video-interface';
 
 export interface VideoListResponseI {
@@ -23,17 +24,19 @@ export interface VideoListResponseI {
 })
 export class YoutubeService {
     nextPageToken: string = '';
-    defaultCount: number = 2;
+    defaultPerRequestResult: number = 2;
+    defaultSummaryResult: number = 20;
     defaultRegionCode: string = 'RU';
 
     constructor(private http: HttpClient) {}
 
     getVideoList(
-        maxResults: number = this.defaultCount,
+        maxResults: number = this.defaultPerRequestResult,
+        totalResults: number = this.defaultSummaryResult,
         regionCode: string = this.defaultRegionCode,
         pageToken: string = this.nextPageToken
     ): Observable<VideoListResponseI> {
-        const url = `https://content.googleapis.com/youtube/v3/videos?chart=mostPopular&part=snippet%2CcontentDetails%2Cstatistics&maxResults=${maxResults}&locale=Russia&regionCode=${regionCode}&key=${Constants.YT_KEY}&pageToken=${pageToken}`;
+        const url = `https://content.googleapis.com/youtube/v3/videos?chart=mostPopular&part=snippet%2CcontentDetails%2Cstatistics&totalResults=${totalResults}&maxResults=${maxResults}&locale=Russia&regionCode=${regionCode}&key=${Constants.YT_KEY}&pageToken=${pageToken}`;
 
         return this.http.get<VideoListResponseI>(url).pipe(
             tap((response: VideoListResponseI) => {

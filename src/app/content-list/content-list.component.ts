@@ -24,11 +24,15 @@ export class ContentListComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit(): void {
-        // this.getVideoList();
+        this.getVideoList();
     }
 
     ngOnDestroy(): void {
         this.$videoSub.unsubscribe();
+    }
+
+    get cancelAddScroll():boolean {
+        return this.isShowOnlyFavorite() || this.videos.length >= this.youtube.defaultSummaryResult || !this.youtube.nextPageToken;
     }
 
     getVideoList() {
@@ -78,9 +82,5 @@ export class ContentListComponent implements OnInit, OnDestroy {
 
     toggleOnlyFavoriteMode(): void {
         this.storageService.toggleOnlyFavoriteMode();
-    }
-
-    cancelScroll():boolean {//todo
-        return this.isShowOnlyFavorite() || this.videos.length >= 30
     }
 }
