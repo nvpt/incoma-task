@@ -14,6 +14,7 @@ import {LoaderComponent} from './components/loader/loader.component';
 import {FilterItemsPipe} from './content-list/pipes/filter-items.pipe';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { InfiniteScrollDirective } from './directives/infinite-scroll.directive';
 
 @NgModule({
     declarations: [
@@ -22,7 +23,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
         ListItemComponent,
         InlineSearchComponent,
         LoaderComponent,
-        FilterItemsPipe
+        FilterItemsPipe,
+        InfiniteScrollDirective
     ],
     imports: [
         BrowserModule,
