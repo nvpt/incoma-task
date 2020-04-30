@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
 
 import {Constants} from '../../../constants';
@@ -10,9 +10,11 @@ import {VideoI} from '../../../services/youtube.service';
     styleUrls: ['./list-item.component.scss']
 })
 export class ListItemComponent implements OnInit {
-    @Input() video?: VideoI;
+    @Input() video: VideoI;
+    @Input() selected?: boolean;
+    @Output() onToggle: EventEmitter<boolean> = new EventEmitter<boolean>();
+
     constants = Constants;
-    selected: boolean = false;
 
     constructor(public sanitizer: DomSanitizer) {}
 
@@ -20,5 +22,6 @@ export class ListItemComponent implements OnInit {
 
     toggle(): void {
         this.selected = !this.selected;
+        this.onToggle.emit(this.selected);
     }
 }

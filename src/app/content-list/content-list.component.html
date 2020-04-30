@@ -18,17 +18,9 @@
 
     <div class="list">
 
-<!--                    <app-list-item *ngFor="let video of videos"-->
-<!--                                   [video]="video"></app-list-item>-->
-
-<!--        <app-list-item></app-list-item>-->
-<!--        <app-list-item></app-list-item>-->
-<!--        <app-list-item></app-list-item>-->
-<!--        <app-list-item></app-list-item>-->
-<!--        <app-list-item></app-list-item>-->
-<!--        <app-list-item></app-list-item>-->
-<!--        <app-list-item></app-list-item>-->
-<!--        <app-list-item></app-list-item>-->
-
+        <app-list-item *ngFor="let video of videos | filterItems:filterValue"
+                       [video]="video"
+                       (onToggle)="toggle($event, video.id.videoId)"
+                       [selected]="isSelected(video.id.videoId)"></app-list-item>
     </div>
 </div>
