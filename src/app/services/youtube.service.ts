@@ -3,50 +3,14 @@ import {Constants} from '../constants';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {tap} from 'rxjs/operators';
-
-export interface VideoI {
-    //todo *** change interface
-    etag: string;
-    id: string;
-    // {
-    //     kind: string;
-    //     videoId: string;
-    // };
-    kind: string;
-    snippet: any;
-    // {
-    //     channelId: string;
-    //     channelTitle: string;
-    //     description: string;
-    //     liveBroadcastContent: string;
-    //     publishedAt: string;
-    //     thumbnails: {
-    //         default: {
-    //             height: number;
-    //             url: string;
-    //             width: number;
-    //         };
-    //         medium: {
-    //             height: number;
-    //             url: string;
-    //             width: number;
-    //         };
-    //         high: {
-    //             height: number;
-    //             url: string;
-    //             width: number;
-    //         };
-    //     };
-    title: string;
-    // };
-    statistics?: any;
-}
+import {VideoI} from '../interfaces/video-interface';
 
 export interface VideoListResponseI {
     etag: string;
     items: VideoI[];
     kind: string;
     nextPageToken: string;
+    prevPageToken: string;
     pageInfo: {
         totalResults: number;
         resultsPerPage: number;

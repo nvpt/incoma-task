@@ -1,6 +1,7 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {VideoI} from '../../services/youtube.service';
+
 import {Constants} from '../../constants';
+import {VideoI} from '../../interfaces/video-interface';
 import {StorageObjectI} from '../../interfaces/storage-object-interface';
 
 @Pipe({

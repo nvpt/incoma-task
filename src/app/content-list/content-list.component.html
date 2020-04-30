@@ -14,24 +14,24 @@
                                                  class="checkbox-btn"
                                                  (click)="toggleOnlyFavoriteMode()"
                                                  [defaultChecked]="isShowOnlyFavorite()">Только избранные</label>
-            <button class="g-btn g-btn-error" (click)="clearFavorites()">Очистить избранные
+            <button class="g-btn g-btn-error"
+                    (click)="clearFavorites()">Очистить избранные
             </button>
         </div>
     </div>
 
 
-    <div class="list" appInfiniteScroll (onScroll)="getVideoList()" [cancelScroll]="cancelScroll()" #list>
+    <div class="list"
+         appInfiniteScroll
+         (onScroll)="getVideoList()"
+         [cancelScroll]="cancelScroll()"
+         #list>
 
         <app-list-item *ngFor="let video of videos | filterItems:filterValue: isShowOnlyFavorite()"
                        [video]="video"
                        (onToggle)="toggle(video.id)"
                        [favorite]="isItemFavorite(video.id)"></app-list-item>
-
-
-<!--        <app-list-item></app-list-item>-->
-<!--        <app-list-item></app-list-item>-->
-<!--        <app-list-item></app-list-item>-->
-        <div id="anchor"></div>
+        <div id="scrollAnchor"></div>
     </div>
 
 </div>

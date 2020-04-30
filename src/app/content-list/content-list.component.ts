@@ -1,9 +1,10 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Subscription} from 'rxjs';
 
-import {VideoI, YoutubeService} from '../services/youtube.service';
+import {YoutubeService} from '../services/youtube.service';
 import {LoaderService} from '../services/loader.service';
 import {StorageService} from '../services/storage.service';
+import {VideoI} from '../interfaces/video-interface';
 
 @Component({
     selector: 'app-content-list',
