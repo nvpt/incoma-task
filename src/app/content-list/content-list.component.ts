@@ -19,6 +19,18 @@ export class ContentListComponent implements OnInit {
         this.getVideoList();
     }
 
+    get isShowOnlyFavorite(): boolean {
+        const storageData = localStorage.getItem(Constants.STORAGE_KEY);
+        let storageObj: StorageObjectI = <StorageObjectI>{};
+
+        if (storageData) {
+            storageObj = JSON.parse(storageData);
+            return storageObj.showOnlyFavorite;
+        }
+
+        return false;
+    }
+
     getVideoList() {
         this.loader.show();
         this.youtube.getVideoList().subscribe((res) => {
@@ -39,25 +51,13 @@ export class ContentListComponent implements OnInit {
         return false;
     }
 
-    get hasFavorite(): boolean {
+    hasFavorite(): boolean {
         const storageData = localStorage.getItem(Constants.STORAGE_KEY);
         let storageObj: StorageObjectI = <StorageObjectI>{};
 
         if (storageData) {
             storageObj = JSON.parse(storageData);
             return !!(storageObj.favorite && storageObj.favorite.length);
-        }
-
-        return false;
-    }
-
-    isShowOnlyFavorite(): boolean {
-        const storageData = localStorage.getItem(Constants.STORAGE_KEY);
-        let storageObj: StorageObjectI = <StorageObjectI>{};
-
-        if (storageData) {
-            storageObj = JSON.parse(storageData);
-            return storageObj.showOnlyFavorite;
         }
 
         return false;
@@ -91,7 +91,6 @@ export class ContentListComponent implements OnInit {
             storageObj = JSON.parse(storageData);
         }
         storageObj.showOnlyFavorite = !storageObj.showOnlyFavorite;
-    //todo *** change showed list
         localStorage.setItem(Constants.STORAGE_KEY, JSON.stringify(storageObj));
     }
 }
