@@ -1,7 +1,7 @@
 <div class="content-list">
 
     <div class="top-panel">
-        <h1>Список</h1>
+        <h1>Популярные видео. Топ-50.</h1>
     </div>
 
     <div class="control-panel">
@@ -13,8 +13,8 @@
             <label class="checkbox-label"><input type="checkbox"
                                                  class="checkbox-btn"
                                                  (click)="toggleOnlyFavoriteMode()"
-                                                 [defaultChecked]="isShowOnlyFavorite()">Only favorites</label>
-            <button class="g-btn g-btn-error" (click)="clearFavorites()">Clear favorites
+                                                 [defaultChecked]="isShowOnlyFavorite()">Только избранные</label>
+            <button class="g-btn g-btn-error" (click)="clearFavorites()">Очистить избранные
             </button>
         </div>
     </div>
@@ -23,12 +23,14 @@
 
         <app-list-item *ngFor="let video of videos | filterItems:filterValue: isShowOnlyFavorite()"
                        [video]="video"
-                       (onToggle)="toggle(video.id.videoId)"
-                       [favorite]="isItemFavorite(video.id.videoId)"></app-list-item>
+                       (onToggle)="toggle(video.id)"
+                       [favorite]="isItemFavorite(video.id)"></app-list-item>
 
 
 <!--        <app-list-item></app-list-item>-->
 <!--        <app-list-item></app-list-item>-->
 <!--        <app-list-item></app-list-item>-->
+        <div id="anchor"></div>
     </div>
+
 </div>

@@ -39,6 +39,8 @@
     padding: $content-padding;
     overflow: auto;
 
+    height: 300%; //todo temp
+
     @media(max-width: $max-small){
         grid-template-columns: 1fr;
     }
@@ -76,4 +78,10 @@
     height: $size;
     margin-right: $string-padding;
     cursor: pointer;
+}
+
+#anchor {
+    align-self: end;
+    height: 40px;
+    outline: 1px solid red;
 }

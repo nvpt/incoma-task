@@ -19,7 +19,7 @@ export class FilterItemsPipe implements PipeTransform {
                 storageObj = JSON.parse(storageData);
                 storageObj.favorite = storageObj.favorite || [];
 
-                result = [...result.filter((video) => storageObj.favorite.includes(video.id.videoId))];
+                result = [...result.filter((video) => storageObj.favorite.includes(video.id))];
             }
         }
 

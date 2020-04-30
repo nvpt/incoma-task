@@ -22,24 +22,19 @@ export class ContentListComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit(): void {
-        this.getVideoList();
-        // this.test();
+        // this.getVideoList();
     }
 
     ngOnDestroy(): void {
         this.$videoSub.unsubscribe();
     }
 
-    test() {
-        this.youtube.test().subscribe((res) => {
-            console.log('26 >>> res: ', res);
-        });
-    }
-
     getVideoList() {
         this.loader.show();
         this.$videoSub = this.youtube.getVideoList().subscribe(
             (res) => {
+                console.log('43 >>> res: ', res);
+                
                 this.videos = res.items;
                 this.loader.hide();
             },
