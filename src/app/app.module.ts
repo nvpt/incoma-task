@@ -10,9 +10,10 @@ import {ContentListComponent} from './content-list/content-list.component';
 import {ListItemComponent} from './content-list/components/list-item/list-item.component';
 import {InlineSearchComponent} from './components/inline-search/inline-search.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { FilterItemsPipe } from './content-list/pipes/filter-items.pipe';
 
 @NgModule({
-    declarations: [AppComponent, ContentListComponent, ListItemComponent, InlineSearchComponent, LoaderComponent],
+    declarations: [AppComponent, ContentListComponent, ListItemComponent, InlineSearchComponent, LoaderComponent, FilterItemsPipe],
     imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
     providers: [],
     bootstrap: [AppComponent]
