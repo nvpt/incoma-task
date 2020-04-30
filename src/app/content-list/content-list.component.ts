@@ -27,13 +27,37 @@ export class ContentListComponent implements OnInit {
         });
     }
 
-    isSelected(id: string): boolean {
+    isItemFavorite(id: string): boolean {
         const storageData = localStorage.getItem(Constants.STORAGE_KEY);
         let storageObj: StorageObjectI = <StorageObjectI>{};
 
         if (storageData) {
             storageObj = JSON.parse(storageData);
-            return storageObj.selected && storageObj.selected.includes(id);
+            return storageObj.favorite && storageObj.favorite.includes(id);
+        }
+
+        return false;
+    }
+
+    get hasFavorite(): boolean {
+        const storageData = localStorage.getItem(Constants.STORAGE_KEY);
+        let storageObj: StorageObjectI = <StorageObjectI>{};
+
+        if (storageData) {
+            storageObj = JSON.parse(storageData);
+            return !!(storageObj.favorite && storageObj.favorite.length);
+        }
+
+        return false;
+    }
+
+    isShowOnlyFavorite(): boolean {
+        const storageData = localStorage.getItem(Constants.STORAGE_KEY);
+        let storageObj: StorageObjectI = <StorageObjectI>{};
+
+        if (storageData) {
+            storageObj = JSON.parse(storageData);
+            return storageObj.showOnlyFavorite;
         }
 
         return false;
@@ -42,20 +66,32 @@ export class ContentListComponent implements OnInit {
     toggle($event: boolean, toggledId: string) {
         const storageData = localStorage.getItem(Constants.STORAGE_KEY);
         let storageObj: StorageObjectI = <StorageObjectI>{};
-        storageObj.selected = [];
+        storageObj.favorite = [];
 
         if (storageData) {
             storageObj = JSON.parse(storageData);
+            storageObj.favorite = storageObj.favorite || [];
 
-            if (storageObj.selected.includes(toggledId)) {
-                storageObj.selected = [...storageObj.selected.filter((id) => id !== toggledId)];
+            if (storageObj.favorite.includes(toggledId)) {
+                storageObj.favorite = [...storageObj.favorite.filter((id) => id !== toggledId)];
             } else {
-                storageObj.selected.push(toggledId);
+                storageObj.favorite.push(toggledId);
             }
         } else {
-            storageObj.selected.push(toggledId);
+            storageObj.favorite.push(toggledId);
         }
 
+        localStorage.setItem(Constants.STORAGE_KEY, JSON.stringify(storageObj));
+    }
+
+    toggleOnlyFavoriteMode() {
+        const storageData = localStorage.getItem(Constants.STORAGE_KEY);
+        let storageObj: StorageObjectI = <StorageObjectI>{};
+        if (storageData) {
+            storageObj = JSON.parse(storageData);
+        }
+        storageObj.showOnlyFavorite = !storageObj.showOnlyFavorite;
+    //todo *** change showed list
         localStorage.setItem(Constants.STORAGE_KEY, JSON.stringify(storageObj));
     }
 }

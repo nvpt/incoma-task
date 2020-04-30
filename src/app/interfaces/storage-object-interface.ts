@@ -1,4 +1,4 @@
 export interface StorageObjectI {
-    selected?: string[];
-    onlySelected?: boolean;
+    favorite?: string[];
+    showOnlyFavorite?: boolean;
 }

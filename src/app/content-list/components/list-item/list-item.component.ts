@@ -11,7 +11,7 @@ import {VideoI} from '../../../services/youtube.service';
 })
 export class ListItemComponent implements OnInit {
     @Input() video: VideoI;
-    @Input() selected?: boolean;
+    @Input() favorite?: boolean;
     @Output() onToggle: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     constants = Constants;
@@ -21,7 +21,7 @@ export class ListItemComponent implements OnInit {
     ngOnInit(): void {}
 
     toggle(): void {
-        this.selected = !this.selected;
-        this.onToggle.emit(this.selected);
+        this.favorite = !this.favorite;
+        this.onToggle.emit(this.favorite);
     }
 }
