@@ -34,6 +34,11 @@
     overflow: auto;
     align-items: center;
     border-bottom: 1px solid #ccc;
+
+    @media(max-width: $max-small){
+        grid-row-gap: $string-padding;
+        grid-template-columns: 1fr;
+    }
 }
 
 .buttons {
@@ -76,6 +81,11 @@
     margin: $string-padding $string-padding * 2 $string-padding 0;
     align-items: center;
     cursor: pointer;
+
+    @media(max-width: $max-small){
+        margin: $string-padding $string-padding * 2 $string-padding * 2 0;
+
+    }
 }
 
 #scrollAnchor {

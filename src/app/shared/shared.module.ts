@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {YouTubePlayerModule} from '@angular/youtube-player';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {FormsModule} from '@angular/forms';
 
 /*ANGULAR MATERIAL*/
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
@@ -31,6 +32,7 @@ import {InfiniteScrollDirective} from '../directives/infinite-scroll.directive';
     ],
     imports: [
         CommonModule,
+        FormsModule,
         MatProgressSpinnerModule,
         MatCheckboxModule,
         MatButtonModule,
@@ -39,6 +41,7 @@ import {InfiniteScrollDirective} from '../directives/infinite-scroll.directive';
     ],
     exports: [
         CommonModule,
+        FormsModule,
         MatProgressSpinnerModule,
         MatCheckboxModule,
         MatButtonModule,
