@@ -23,7 +23,7 @@ export class TopRatePageComponent implements OnInit, OnDestroy {
     constructor(public youtube: YoutubeService, public storageService: StorageService, private loader: LoaderService) {}
 
     ngOnInit(): void {
-        this.getVideoList();
+        this.getVideoList(false);
     }
 
     ngOnDestroy(): void {
@@ -38,7 +38,7 @@ export class TopRatePageComponent implements OnInit, OnDestroy {
         );
     }
 
-    getVideoList(): void {
+    getVideoList(scrollBottom:boolean = true): void {
         this.loader.show();
 
         this.$videoSub = this.youtube.getVideoList().subscribe(
@@ -50,13 +50,13 @@ export class TopRatePageComponent implements OnInit, OnDestroy {
 
                     //will load videos until we've got scroll
                     setTimeout(() => {
-                        this.scrollToBottom();
+                        scrollBottom && this.scrollToBottom();
 
                         if (
                             !this.cancelScroll &&
                             this.list.nativeElement.scrollHeight === this.list.nativeElement.clientHeight
                         ) {
-                            this.getVideoList();
+                            this.getVideoList(scrollBottom);
                         }
                     }, 0);
                 },
