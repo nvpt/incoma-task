@@ -17,6 +17,7 @@ export class StorageService {
 
     clearFavorites() {
         this._storageObj.favorite = [];
+        this._storageObj.showOnlyFavorite = false; // all cards should be shown if we clear favorite list
         this._updateStorage();
     }
 

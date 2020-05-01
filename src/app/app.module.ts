@@ -14,6 +14,8 @@ import {FilterItemsPipe} from './top-rate-page/pipes/filter-items.pipe';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {InfiniteScrollDirective} from './directives/infinite-scroll.directive';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
     declarations: [
@@ -32,7 +34,9 @@ import {InfiniteScrollDirective} from './directives/infinite-scroll.directive';
         FormsModule,
         BrowserAnimationsModule,
         YouTubePlayerModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        MatCheckboxModule,
+        MatButtonModule
     ],
     providers: [],
     bootstrap: [AppComponent]

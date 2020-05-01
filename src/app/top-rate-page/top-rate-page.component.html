@@ -9,17 +9,18 @@
             <app-inline-search [(search)]="filterValue"></app-inline-search>
         </div>
         <div class="buttons">
-
-            <label class="checkbox-label"><input type="checkbox"
-                                                 class="checkbox-btn"
-                                                 (click)="toggleOnlyFavoriteMode()"
-                                                 [defaultChecked]="isShowOnlyFavorite()">Только избранные</label>
-            <button class="g-btn g-btn-error"
+            <mat-checkbox
+                class="checkbox-btn"
+                [ngModel]="isShowOnlyFavorite()"
+                (ngModelChange)="toggleOnlyFavoriteMode()">
+                Только избранные
+            </mat-checkbox>
+            <button mat-stroked-button
+                    color="accent"
                     (click)="clearFavorites()">Очистить избранные
             </button>
         </div>
     </div>
-
 
     <div class="list"
          appInfiniteScroll
@@ -27,7 +28,7 @@
          [cancelScroll]="cancelAddScroll"
          #list>
 
-        <app-list-item *ngFor="let video of videos | filterItems:filterValue: isShowOnlyFavorite()"
+        <app-list-item *ngFor="let video of videos | filterItems:filterValue:isShowOnlyFavorite()"
                        [video]="video"
                        (onToggle)="toggle(video.id)"
                        [favorite]="isItemFavorite(video.id)"></app-list-item>
