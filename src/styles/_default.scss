@@ -33,4 +33,11 @@ iframe {
     min-width: $min-iframe-width;
     height: $iframe-height;
     min-height: $min-iframe-height;
+
+    @media (max-width:$max-small){
+        min-width: initial;
+        min-height: auto;
+        max-width: 100%;
+        max-height: 100%;
+    }
 }

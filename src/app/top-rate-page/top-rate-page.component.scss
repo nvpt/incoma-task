@@ -9,16 +9,20 @@
 .content-list {
     display: grid;
     grid-template-rows: minmax(60px, auto) minmax(60px, auto) 1fr;
+    padding-bottom: 20px;
     overflow: auto;
     text-align: center;
 }
 
-.top-panel,
-.control-panel {
+.top-panel {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
     padding: 0 $content-padding;
+
+    small   {
+        line-height: 1.5;
+    }
 }
 
 .control-panel {
@@ -32,11 +36,20 @@
     border-bottom: 1px solid #ccc;
 }
 
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    grid-gap: 10px;
+    align-items: center;
+}
+
 .list {
     display: grid;
     grid-gap: 20px;
-    grid-template-columns: repeat(auto-fill, minmax($iframe-width + 20, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax($iframe-width + 40, 1fr));
+    width: 100%;
     padding: $content-padding;
+    margin: 0 auto;
     overflow: auto;
 
     @media(max-width: $max-small){
@@ -57,12 +70,6 @@
     }
 }
 
-.buttons {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-}
-
 .checkbox-label {
 
 }
@@ -78,4 +85,8 @@
 #scrollAnchor {
     align-self: end;
     height: 40px;
+}
+
+.more-wrap {
+    padding: $content-padding / 2 0 0;
 }

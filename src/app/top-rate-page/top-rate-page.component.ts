@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Subscription} from 'rxjs';
 
 import {YoutubeService} from '../services/youtube.service';
@@ -19,11 +19,7 @@ export class TopRatePageComponent implements OnInit, OnDestroy {
     showOnlyFavorite: boolean = false;
     forceCallPipe: boolean = false;
 
-    constructor(
-        private youtube: YoutubeService,
-        private loader: LoaderService,
-        public storageService: StorageService
-    ) {}
+    constructor(public youtube: YoutubeService, public storageService: StorageService, private loader: LoaderService) {}
 
     ngOnInit(): void {
         this.getVideoList();
@@ -33,25 +29,30 @@ export class TopRatePageComponent implements OnInit, OnDestroy {
         this.$videoSub.unsubscribe();
     }
 
-    get cancelScroll():boolean {
-        return this.showOnlyFavorite || this.videos.length >= this.youtube.defaultSummaryResult || !this.youtube.nextPageToken;
+    get cancelScroll(): boolean {
+        return (
+            this.showOnlyFavorite ||
+            this.videos.length >= this.youtube.defaultSummaryResult ||
+            !this.youtube.nextPageToken
+        );
     }
 
     getVideoList() {
-        
         this.loader.show();
         this.$videoSub = this.youtube.getVideoList().subscribe(
             (res) => {
-
                 this.videos = [...this.videos, ...res.items];
                 this.loader.hide();
-                
+
                 //we need scroll so will load videos until've got it
-                setTimeout(() => {
-                    if(!this.cancelScroll && this.list.nativeElement.scrollHeight === this.list.nativeElement.clientHeight){
-                        this.getVideoList();
-                    }
-                }, 1000);
+                // setTimeout(() => {
+                //     if (
+                //         !this.cancelScroll &&
+                //         this.list.nativeElement.scrollHeight === this.list.nativeElement.clientHeight
+                //     ) {
+                //         this.getVideoList();
+                //     }
+                // }, 0);
             },
             () => {
                 this.loader.hide();
@@ -77,7 +78,7 @@ export class TopRatePageComponent implements OnInit, OnDestroy {
         this._forceCallPipe();
     }
 
-    private _forceCallPipe(){
+    private _forceCallPipe() {
         this.forceCallPipe = !this.forceCallPipe;
     }
 }

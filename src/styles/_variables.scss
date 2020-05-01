@@ -14,5 +14,8 @@ $line-height-default: 1.2;
 
 
 //media
+$max-medium: 940px;
+$min-medium: $max-medium - 1;
+
 $max-small: 668px;
 $min-small: $max-small - 1;

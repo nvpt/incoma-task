@@ -1,7 +1,9 @@
 <div class="content-list">
 
     <div class="top-panel">
-        <h1>Популярные видео. {{videos.length ? 'Топ-' + videos.length + '.' : ''}}</h1>
+        <h1>Популярные видео. Топ-{{youtube.defaultSummaryResult}}.</h1>
+        <br>
+        <small><i>Загружено {{videos.length}}</i></small>
     </div>
 
     <div class="control-panel">
@@ -32,5 +34,11 @@
                        (onToggle)="toggle(video.id)"
                        [favorite]="isItemFavorite(video.id)"></app-list-item>
         <div id="scrollAnchor"></div>
+    </div>
+    <div class="more-wrap" *ngIf="videos?.length < youtube.defaultSummaryResult">
+        <button mat-raised-button
+                color="primary"
+                (click)="getVideoList()">Ещё
+        </button>
     </div>
 </div>
