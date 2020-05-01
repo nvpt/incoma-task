@@ -24,7 +24,7 @@
 
     <div class="list"
          appInfiniteScroll
-         (onScroll)="getVideoList()"
+         (onScroll)="getVideoList().subscribe()"
          [cancelScroll]="cancelScroll"
          #list>
 
@@ -37,7 +37,7 @@
     <div class="more-wrap" *ngIf="videos?.length < youtube.defaultSummaryResult">
         <button mat-raised-button
                 color="primary"
-                (click)="getVideoList()">Ещё
+                (click)="more()">Ещё
         </button>
     </div>
 </div>
