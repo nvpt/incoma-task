@@ -34,7 +34,7 @@
                        [favorite]="isItemFavorite(video.id)"></app-list-item>
         <div id="scrollAnchor"></div>
     </div>
-    <div class="more-wrap" *ngIf="videos?.length < youtube.defaultSummaryResult">
+    <div class="more-wrap" *ngIf="!showOnlyFavorite && videos?.length < youtube.defaultSummaryResult">
         <button mat-raised-button
                 color="primary"
                 (click)="more()">Ещё
