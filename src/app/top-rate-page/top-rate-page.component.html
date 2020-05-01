@@ -2,12 +2,11 @@
 
     <div class="top-panel">
         <h1>Популярные видео. Топ-{{youtube.defaultSummaryResult}}.</h1>
-        <br>
-        <small><i>Загружено {{videos.length}}</i></small>
+        <small *ngIf="videos.length">&nbsp;<i>(загружено {{videos.length}}</i>)</small>
     </div>
 
     <div class="control-panel">
-        <div class="filter">
+        <div class="filters">
             <app-inline-search [(search)]="filterValue"></app-inline-search>
         </div>
         <div class="buttons">
@@ -31,7 +30,7 @@
 
         <app-list-item *ngFor="let video of videos | filterItems:filterValue:showOnlyFavorite:forceCallPipe"
                        [video]="video"
-                       (onToggle)="toggle(video.id)"
+                       (onToggle)="toggleFavorite(video.id)"
                        [favorite]="isItemFavorite(video.id)"></app-list-item>
         <div id="scrollAnchor"></div>
     </div>

@@ -57,7 +57,7 @@
     }
 }
 
-.filter {
+.filters {
     width: 300px;
 
     @media (max-width: $max-small) {
@@ -68,10 +68,6 @@
     input {
         width: 100%;
     }
-}
-
-.checkbox-label {
-
 }
 
 .checkbox-btn {

@@ -13,16 +13,17 @@ import {VideoI} from '../interfaces/video-interface';
 })
 export class TopRatePageComponent implements OnInit, OnDestroy {
     @ViewChild('list') list: ElementRef;
+
     videos: VideoI[] = [];
     filterValue: string = '';
-    $videoSub: Subscription;
     showOnlyFavorite: boolean = false;
     forceCallPipe: boolean = false;
+    $videoSub: Subscription;
 
     constructor(public youtube: YoutubeService, public storageService: StorageService, private loader: LoaderService) {}
 
     ngOnInit(): void {
-        this.getVideoList();
+        // this.getVideoList();
     }
 
     ngOnDestroy(): void {
@@ -37,22 +38,23 @@ export class TopRatePageComponent implements OnInit, OnDestroy {
         );
     }
 
-    getVideoList() {
+    getVideoList(): void {
         this.loader.show();
         this.$videoSub = this.youtube.getVideoList().subscribe(
-            (res) => {
-                this.videos = [...this.videos, ...res.items];
+            (response) => {
+                this.videos = [...this.videos, ...response.items];
+                this.youtube.nextPageToken = response.nextPageToken;
                 this.loader.hide();
 
-                //we need scroll so will load videos until've got it
-                // setTimeout(() => {
-                //     if (
-                //         !this.cancelScroll &&
-                //         this.list.nativeElement.scrollHeight === this.list.nativeElement.clientHeight
-                //     ) {
-                //         this.getVideoList();
-                //     }
-                // }, 0);
+                //will load videos until we've got scroll
+                setTimeout(() => {
+                    if (
+                        !this.cancelScroll &&
+                        this.list.nativeElement.scrollHeight === this.list.nativeElement.clientHeight
+                    ) {
+                        this.getVideoList();
+                    }
+                }, 0);
             },
             () => {
                 this.loader.hide();
@@ -73,12 +75,12 @@ export class TopRatePageComponent implements OnInit, OnDestroy {
         this._forceCallPipe();
     }
 
-    toggle(toggledId: string): void {
+    toggleFavorite(toggledId: string): void {
         this.storageService.toggle(toggledId);
         this._forceCallPipe();
     }
 
-    private _forceCallPipe() {
+    private _forceCallPipe(): void {
         this.forceCallPipe = !this.forceCallPipe;
     }
 }
