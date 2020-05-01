@@ -23,7 +23,7 @@ export class TopRatePageComponent implements OnInit, OnDestroy {
     constructor(public youtube: YoutubeService, public storageService: StorageService, private loader: LoaderService) {}
 
     ngOnInit(): void {
-        // this.getVideoList();
+        this.getVideoList();
     }
 
     ngOnDestroy(): void {
@@ -76,7 +76,7 @@ export class TopRatePageComponent implements OnInit, OnDestroy {
     }
 
     toggleFavorite(toggledId: string): void {
-        this.storageService.toggle(toggledId);
+        this.storageService.toggleFavorite(toggledId);
         this._forceCallPipe();
     }
 

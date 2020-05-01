@@ -8,10 +8,10 @@
                #inputField>
     </label>
 
-    <span class="material-icons inline-search__icon inline-search__icon"
+    <span class="material-icons inline-search__icon"
           *ngIf="!search?.length; else clearSearch" (click)="focus()">search</span>
     <ng-template #clearSearch>
-        <span class="material-icons inline-search__icon inline-search__icon"
+        <span class="material-icons inline-search__icon"
               (click)="clear()">close</span>
     </ng-template>
 </div>

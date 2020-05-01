@@ -8,6 +8,7 @@ export class InfiniteScrollDirective {
     @Input() cancelScroll?: boolean = false;
 
     @HostListener('scroll', ['$event']) onScrollHandler(event: any): void {
+
         if (event.target.scrollHeight - event.target.scrollTop <= event.target.clientHeight) {
             !this.cancelScroll && this.onScroll.emit();
         }

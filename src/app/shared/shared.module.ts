@@ -16,7 +16,7 @@ import {InlineSearchComponent} from '../components/inline-search/inline-search.c
 import {LoaderComponent} from '../components/loader/loader.component';
 
 /*PIPES*/
-import {FilterItemsPipe} from '../top-rate-page/pipes/filter-items.pipe';
+import {FilterVideoPipe} from '../top-rate-page/pipes/filter-video.pipe';
 
 /*DIRECTIVES*/
 import {InfiniteScrollDirective} from '../directives/infinite-scroll.directive';
@@ -27,7 +27,7 @@ import {InfiniteScrollDirective} from '../directives/infinite-scroll.directive';
         ListItemComponent,
         InlineSearchComponent,
         LoaderComponent,
-        FilterItemsPipe,
+        FilterVideoPipe,
         InfiniteScrollDirective
     ],
     imports: [
@@ -51,7 +51,7 @@ import {InfiniteScrollDirective} from '../directives/infinite-scroll.directive';
         ListItemComponent,
         InlineSearchComponent,
         LoaderComponent,
-        FilterItemsPipe,
+        FilterVideoPipe,
         InfiniteScrollDirective
     ]
 })

@@ -20,15 +20,11 @@ export class StorageService {
         this._updateStorage();
     }
 
-    hasFavorite(): boolean {
-        return !!(this._storageObj.favorite && this._storageObj.favorite.length);
-    }
-
     isItemFavorite(id: string): boolean {
         return this._storageObj.favorite && this._storageObj.favorite.includes(id);
     }
 
-    toggle(toggledId: string): void {
+    toggleFavorite(toggledId: string): void {
         if (this._storageObj.favorite) {
             if (this._storageObj.favorite.includes(toggledId)) {
                 this._storageObj.favorite = [...this._storageObj.favorite.filter((id) => id !== toggledId)];

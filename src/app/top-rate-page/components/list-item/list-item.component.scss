@@ -2,7 +2,7 @@
 .list-item {
     display: inline-flex;
 
-    @media(max-width: $max-small){
+    @media (max-width: $max-small) {
         display: block;
     }
 }
@@ -21,17 +21,5 @@
     &:active,
     &.favorite {
         color: #ffe600;
-    }
-}
-
-
-iframe {
-    @media(max-width: $max-small){
-        max-width: 100%;
-        min-width: initial;
-        width: initial;
-        max-height: 100%;
-        height: initial;
-        min-height: initial;
     }
 }

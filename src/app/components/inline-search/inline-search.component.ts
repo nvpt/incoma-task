@@ -10,11 +10,11 @@ export class InlineSearchComponent {
     @Input() search: string;
     @Output() searchChange: EventEmitter<string> = new EventEmitter<string>();
 
-    clear() {
+    clear(): void {
         this.searchChange.emit('');
     }
 
-    focus() {
+    focus(): void {
         this.inputField.nativeElement.focus();
     }
 }

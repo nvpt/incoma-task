@@ -5,10 +5,15 @@ import {VideoI} from '../../interfaces/video-interface';
 import {StorageObjectI} from '../../interfaces/storage-object-interface';
 
 @Pipe({
-    name: 'filterItems'
+    name: 'filterVideo'
 })
-export class FilterItemsPipe implements PipeTransform {
-    transform(elements: VideoI[], stringSearch: string = '', onlyFavorite: boolean = false): any[] {
+export class FilterVideoPipe implements PipeTransform {
+    transform(
+        elements: VideoI[],
+        stringSearch: string = '',
+        onlyFavorite: boolean = false,
+        forceCall: boolean = false
+    ): VideoI[] {
         let result: VideoI[] = [...elements];
 
         //favorite filtering
@@ -23,7 +28,6 @@ export class FilterItemsPipe implements PipeTransform {
                 result = [...result.filter((video) => storageObj.favorite.includes(video.id))];
             }
         }
-
 
         if (!stringSearch.trim()) {
             return result;

@@ -28,7 +28,7 @@
          [cancelScroll]="cancelScroll"
          #list>
 
-        <app-list-item *ngFor="let video of videos | filterItems:filterValue:showOnlyFavorite:forceCallPipe"
+        <app-list-item *ngFor="let video of videos | filterVideo:filterValue:showOnlyFavorite:forceCallPipe"
                        [video]="video"
                        (onToggle)="toggleFavorite(video.id)"
                        [favorite]="isItemFavorite(video.id)"></app-list-item>
