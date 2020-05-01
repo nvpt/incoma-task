@@ -41,7 +41,7 @@ export class TopRatePageComponent implements OnInit, OnDestroy {
 
     getVideoList(): Observable<any> {
         this.loader.show();
-        
+
         return this.youtube.getVideoList().pipe(
             tap(
                 (response) => {
@@ -90,13 +90,16 @@ export class TopRatePageComponent implements OnInit, OnDestroy {
 
     more() {
         this.getVideoList().subscribe(() => {
-            this.scrollToBottom();
+            setTimeout(() => {
+                this.scrollToBottom();
+            }, 100);
         });
     }
 
     scrollToBottom(): void {
         try {
-            this.list.nativeElement.scrollTop = this.list.nativeElement.scrollHeight - 10;
+            this.list.nativeElement.scrollTop =
+                this.list.nativeElement.scrollHeight - this.list.nativeElement.clientHeight - 20;
         } catch (err) {
             console.log(err);
         }

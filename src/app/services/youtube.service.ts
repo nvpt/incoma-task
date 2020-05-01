@@ -23,7 +23,7 @@ export interface VideoListResponseI {
 })
 export class YoutubeService {
     nextPageToken: string = '';
-    defaultPerRequestResult: number = 1;
+    defaultPerRequestResult: number = 6;
     defaultSummaryResult: number = 50;
     defaultRegionCode: string = 'RU';
 
