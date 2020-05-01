@@ -15,7 +15,9 @@ export class TopRatePageComponent implements OnInit, OnDestroy {
     @ViewChild('list') list: ElementRef;
 
     videos: VideoI[] = [];
-    filterValue: string = '';
+    videoIds: string[] = [];
+    favoriteVideos: VideoI[] = [];
+    searchValue: string = '';
     showOnlyFavorite: boolean = false;
     forceCallPipe: boolean = false;
     $videoSub: Subscription;
@@ -30,7 +32,7 @@ export class TopRatePageComponent implements OnInit, OnDestroy {
         this.$videoSub.unsubscribe();
     }
 
-    get cancelScroll(): boolean {
+    get cancelScrollableRequest(): boolean {
         return (
             this.showOnlyFavorite ||
             this.videos.length >= this.youtube.defaultSummaryResult ||
@@ -38,27 +40,65 @@ export class TopRatePageComponent implements OnInit, OnDestroy {
         );
     }
 
-    getVideoList(scrollBottom:boolean = true): void {
+    getVideoList(scrollBottom: boolean = true): void {
         this.loader.show();
 
         this.$videoSub = this.youtube.getVideoList().subscribe(
+            (response) => {
 
+                //it allows avoid duplication
+                const uniqueVideos = response.items.filter((newVideo) =>
+                    this.videos.every((video) => video.id !== newVideo.id)
+                );
+                this.videos = [...this.videos, ...uniqueVideos];
+
+                this.youtube.nextPageToken = response.nextPageToken;
+                this.loader.hide();
+
+
+                setTimeout(() => {
+                    scrollBottom && this.scrollToBottom();
+
+                    //on initial step/after reload - will load videos until we've got scroll
+                    if (
+                        !this.cancelScrollableRequest &&
+                        this.list.nativeElement.scrollHeight === this.list.nativeElement.clientHeight
+                    ) {
+                        this.getVideoList(scrollBottom);
+                    }
+                }, 0);
+            },
+            () => {
+                this.loader.hide();
+            },
+            () => {
+                this.loader.hide();
+            }
+        );
+    }
+
+    showFavorite(event): void {
+        this.showOnlyFavorite = event;
+
+        //define what favorite we haven't yet in downloaded
+        const missingFavoriteVideoIds = this.storageService.storageObj.favorite.filter((id) =>
+            this.videos.every((video) => video.id !== id)
+        );
+
+
+        if (missingFavoriteVideoIds.length) {
+            this.loader.show();
+
+            this.youtube.getFavoriteList(missingFavoriteVideoIds).subscribe(
                 (response) => {
-                    this.videos = [...this.videos, ...response.items];
-                    this.youtube.nextPageToken = response.nextPageToken;
+
+                    //it allows avoid duplication
+                    const uniqueFavorites = response.items.filter((favVideo) =>
+                        this.videos.every((video) => video.id !== favVideo.id)
+                    );
+                    this.videos = [...this.videos, ...uniqueFavorites];
+
                     this.loader.hide();
-
-                    //will load videos until we've got scroll
-                    setTimeout(() => {
-                        scrollBottom && this.scrollToBottom();
-
-                        if (
-                            !this.cancelScroll &&
-                            this.list.nativeElement.scrollHeight === this.list.nativeElement.clientHeight
-                        ) {
-                            this.getVideoList(scrollBottom);
-                        }
-                    }, 0);
                 },
                 () => {
                     this.loader.hide();
@@ -66,8 +106,8 @@ export class TopRatePageComponent implements OnInit, OnDestroy {
                 () => {
                     this.loader.hide();
                 }
-
-        );
+            );
+        }
     }
 
     isItemFavorite(id: string): boolean {

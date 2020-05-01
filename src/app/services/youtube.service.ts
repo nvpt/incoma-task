@@ -23,7 +23,7 @@ export interface VideoListResponseI {
 })
 export class YoutubeService {
     nextPageToken: string = '';
-    defaultPerRequestResult: number = 6;
+    defaultPerRequestResult: number = 5;
     defaultSummaryResult: number = 50;
     defaultRegionCode: string = 'RU';
 
@@ -35,6 +35,13 @@ export class YoutubeService {
         regionCode: string = this.defaultRegionCode
     ): Observable<VideoListResponseI> {
         const url = `https://content.googleapis.com/youtube/v3/videos?chart=mostPopular&part=snippet%2CcontentDetails%2Cstatistics&maxResults=${maxResults}&locale=Russia&regionCode=${regionCode}&key=${Constants.YT_KEY}&pageToken=${pageToken}`;
+
+        return this.http.get<VideoListResponseI>(url);
+    }
+
+    getFavoriteList(ids:string[]):Observable<VideoListResponseI>{
+        const idList=ids.join('%2C')
+        const url = `https://content.googleapis.com/youtube/v3/videos?id=${idList}&part=snippet%2CcontentDetails%2Cstatistics&key=${Constants.YT_KEY}`
 
         return this.http.get<VideoListResponseI>(url);
     }

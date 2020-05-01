@@ -2,17 +2,22 @@
 
     <div class="top-panel">
         <h1>Популярные видео. Топ-{{youtube.defaultSummaryResult}}.</h1>
-        <small *ngIf="videos.length">&nbsp;<i>(загружено {{videos.length}}</i>)</small>
+
+        <small *ngIf="videos.length">&nbsp;<i>(загружено {{videos.length}}</i></small>
+        <small *ngIf="storageService.storageObj?.favorite?.length">,&nbsp;<i>избранных {{storageService.storageObj?.favorite?.length}}</i></small>
+        <small *ngIf="videos.length">)</small>
+
     </div>
 
     <div class="control-panel">
         <div class="filters">
-            <app-inline-search [(search)]="filterValue"></app-inline-search>
+            <app-inline-search [(search)]="searchValue"></app-inline-search>
         </div>
         <div class="buttons">
             <mat-checkbox
                 class="checkbox-btn"
-                [(ngModel)]="showOnlyFavorite">
+                [ngModel]="showOnlyFavorite"
+                (ngModelChange)="showFavorite($event)">
                 Только избранные
             </mat-checkbox>
             <button mat-stroked-button
@@ -23,18 +28,20 @@
     </div>
 
     <div class="list"
-         appInfiniteScroll
          (onScroll)="getVideoList(false)"
-         [cancelScroll]="cancelScroll"
-         #list>
+         [cancelScroll]="cancelScrollableRequest"
+         #list
+         appInfiniteScroll>
 
-        <app-list-item *ngFor="let video of videos | filterVideo:filterValue:showOnlyFavorite:forceCallPipe"
+        <app-list-item *ngFor="let video of videos | filterVideo:searchValue:showOnlyFavorite:forceCallPipe"
                        [video]="video"
                        (onToggle)="toggleFavorite(video.id)"
                        [favorite]="isItemFavorite(video.id)"></app-list-item>
         <div id="scrollAnchor"></div>
     </div>
-    <div class="more-wrap" *ngIf="!showOnlyFavorite && videos?.length < youtube.defaultSummaryResult">
+
+    <div class="more-wrap"
+         *ngIf="!cancelScrollableRequest">
         <button mat-raised-button
                 color="primary"
                 (click)="more()">Ещё
