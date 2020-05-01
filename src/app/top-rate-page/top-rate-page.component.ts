@@ -16,6 +16,7 @@ export class TopRatePageComponent implements OnInit, OnDestroy {
     videos: VideoI[] = [];
     filterValue: string = '';
     $videoSub: Subscription;
+    showOnlyFavorite: boolean = false;
 
     constructor(
         private youtube: YoutubeService,
@@ -32,7 +33,7 @@ export class TopRatePageComponent implements OnInit, OnDestroy {
     }
 
     get cancelAddScroll():boolean {
-        return this.isShowOnlyFavorite() || this.videos.length >= this.youtube.defaultSummaryResult || !this.youtube.nextPageToken;
+        return this.showOnlyFavorite || this.videos.length >= this.youtube.defaultSummaryResult || !this.youtube.nextPageToken;
     }
 
     getVideoList() {
@@ -68,10 +69,6 @@ export class TopRatePageComponent implements OnInit, OnDestroy {
         );
     }
 
-    isShowOnlyFavorite(): boolean {
-        return this.storageService.isShowOnlyFavorite();
-    }
-
     isItemFavorite(id: string): boolean {
         return this.storageService.isItemFavorite(id);
     }
@@ -86,9 +83,5 @@ export class TopRatePageComponent implements OnInit, OnDestroy {
 
     toggle(toggledId: string): void {
         this.storageService.toggle(toggledId);
-    }
-
-    toggleOnlyFavoriteMode(): void {
-        this.storageService.toggleOnlyFavoriteMode();
     }
 }

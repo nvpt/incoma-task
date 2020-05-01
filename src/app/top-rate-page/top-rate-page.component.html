@@ -11,8 +11,7 @@
         <div class="buttons">
             <mat-checkbox
                 class="checkbox-btn"
-                [ngModel]="isShowOnlyFavorite()"
-                (ngModelChange)="toggleOnlyFavoriteMode()">
+                [(ngModel)]="showOnlyFavorite">
                 Только избранные
             </mat-checkbox>
             <button mat-stroked-button
@@ -28,7 +27,7 @@
          [cancelScroll]="cancelAddScroll"
          #list>
 
-        <app-list-item *ngFor="let video of videos | filterItems:filterValue:isShowOnlyFavorite()"
+        <app-list-item *ngFor="let video of videos | filterItems:filterValue:showOnlyFavorite"
                        [video]="video"
                        (onToggle)="toggle(video.id)"
                        [favorite]="isItemFavorite(video.id)"></app-list-item>
