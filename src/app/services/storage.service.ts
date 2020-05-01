@@ -6,40 +6,40 @@ import {StorageObjectI} from '../interfaces/storage-object-interface';
     providedIn: 'root'
 })
 export class StorageService {
-    private _storageData = localStorage.getItem(Constants.STORAGE_KEY);
-    private _storageObj: StorageObjectI = <StorageObjectI>{};
+    storageData = localStorage.getItem(Constants.STORAGE_KEY);
+    storageObj: StorageObjectI = <StorageObjectI>{};
 
     constructor() {
-        if (this._storageData) {
-            this._storageObj = JSON.parse(this._storageData);
+        if (this.storageData) {
+            this.storageObj = JSON.parse(this.storageData);
         }
     }
 
     clearFavorites() {
-        this._storageObj.favorite = [];
+        this.storageObj.favorite = [];
         this._updateStorage();
     }
 
     isItemFavorite(id: string): boolean {
-        return this._storageObj.favorite && this._storageObj.favorite.includes(id);
+        return this.storageObj.favorite && this.storageObj.favorite.includes(id);
     }
 
     toggleFavorite(toggledId: string): void {
-        if (this._storageObj.favorite) {
-            if (this._storageObj.favorite.includes(toggledId)) {
-                this._storageObj.favorite = [...this._storageObj.favorite.filter((id) => id !== toggledId)];
+        if (this.storageObj.favorite) {
+            if (this.storageObj.favorite.includes(toggledId)) {
+                this.storageObj.favorite = [...this.storageObj.favorite.filter((id) => id !== toggledId)];
             } else {
-                this._storageObj.favorite.push(toggledId);
+                this.storageObj.favorite.push(toggledId);
             }
         } else {
-            this._storageObj.favorite = [];
-            this._storageObj.favorite.push(toggledId);
+            this.storageObj.favorite = [];
+            this.storageObj.favorite.push(toggledId);
         }
 
         this._updateStorage();
     }
 
     private _updateStorage() {
-        localStorage.setItem(Constants.STORAGE_KEY, JSON.stringify(this._storageObj));
+        localStorage.setItem(Constants.STORAGE_KEY, JSON.stringify(this.storageObj));
     }
 }
