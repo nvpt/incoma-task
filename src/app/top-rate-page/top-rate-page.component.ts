@@ -17,6 +17,7 @@ export class TopRatePageComponent implements OnInit, OnDestroy {
     filterValue: string = '';
     $videoSub: Subscription;
     showOnlyFavorite: boolean = false;
+    forceCallPipe: boolean = false;
 
     constructor(
         private youtube: YoutubeService,
@@ -32,39 +33,31 @@ export class TopRatePageComponent implements OnInit, OnDestroy {
         this.$videoSub.unsubscribe();
     }
 
-    get cancelAddScroll():boolean {
+    get cancelScroll():boolean {
         return this.showOnlyFavorite || this.videos.length >= this.youtube.defaultSummaryResult || !this.youtube.nextPageToken;
     }
 
     getVideoList() {
-        console.log('39');
         
         this.loader.show();
         this.$videoSub = this.youtube.getVideoList().subscribe(
             (res) => {
-                console.log('43 >>> res: ', res);
 
                 this.videos = [...this.videos, ...res.items];
-                console.log('45 >>> this.videos: ', this.videos);
-                
                 this.loader.hide();
-                console.log('49');
                 
                 //we need scroll so will load videos until've got it
-                //todo *** temp canceling
-                // setTimeout(() => {
-                //     if(!this.cancelAddScroll && this.list.nativeElement.scrollHeight === this.list.nativeElement.clientHeight){
-                //         this.getVideoList();
-                //     }
-                // }, 1000);
+                setTimeout(() => {
+                    if(!this.cancelScroll && this.list.nativeElement.scrollHeight === this.list.nativeElement.clientHeight){
+                        this.getVideoList();
+                    }
+                }, 1000);
             },
             () => {
                 this.loader.hide();
             },
             () => {
                 this.loader.hide();
-
-
             }
         );
     }
@@ -73,15 +66,18 @@ export class TopRatePageComponent implements OnInit, OnDestroy {
         return this.storageService.isItemFavorite(id);
     }
 
-    hasFavorite(): boolean {
-        return this.storageService.hasFavorite();
-    }
-
     clearFavorites(): void {
         this.storageService.clearFavorites();
+        this.showOnlyFavorite = false;
+        this._forceCallPipe();
     }
 
     toggle(toggledId: string): void {
         this.storageService.toggle(toggledId);
+        this._forceCallPipe();
+    }
+
+    private _forceCallPipe(){
+        this.forceCallPipe = !this.forceCallPipe;
     }
 }

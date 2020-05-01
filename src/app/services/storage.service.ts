@@ -10,7 +10,7 @@ export class StorageService {
     private _storageObj: StorageObjectI = <StorageObjectI>{};
 
     constructor() {
-        if(this._storageData){
+        if (this._storageData) {
             this._storageObj = JSON.parse(this._storageData);
         }
     }
@@ -29,7 +29,7 @@ export class StorageService {
     }
 
     toggle(toggledId: string): void {
-        if (this._storageObj.favorite){
+        if (this._storageObj.favorite) {
             if (this._storageObj.favorite.includes(toggledId)) {
                 this._storageObj.favorite = [...this._storageObj.favorite.filter((id) => id !== toggledId)];
             } else {
@@ -40,11 +40,10 @@ export class StorageService {
             this._storageObj.favorite.push(toggledId);
         }
 
-
         this._updateStorage();
     }
 
-    private _updateStorage(){
+    private _updateStorage() {
         localStorage.setItem(Constants.STORAGE_KEY, JSON.stringify(this._storageObj));
     }
 }

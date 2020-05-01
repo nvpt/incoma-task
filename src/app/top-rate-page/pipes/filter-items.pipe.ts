@@ -8,7 +8,7 @@ import {StorageObjectI} from '../../interfaces/storage-object-interface';
     name: 'filterItems'
 })
 export class FilterItemsPipe implements PipeTransform {
-    transform(elements: VideoI[], stringSearch: string = '', onlyFavorite: boolean = false): any[] {
+    transform(elements: VideoI[], stringSearch: string = '', onlyFavorite: boolean = false, forceCall: boolean = false): any[] {
         let result: VideoI[] = [...elements];
 
         //favorite filtering

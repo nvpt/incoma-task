@@ -24,14 +24,13 @@
     <div class="list"
          appInfiniteScroll
          (onScroll)="getVideoList()"
-         [cancelScroll]="cancelAddScroll"
+         [cancelScroll]="cancelScroll"
          #list>
 
-        <app-list-item *ngFor="let video of videos | filterItems:filterValue:showOnlyFavorite"
+        <app-list-item *ngFor="let video of videos | filterItems:filterValue:showOnlyFavorite:forceCallPipe"
                        [video]="video"
                        (onToggle)="toggle(video.id)"
                        [favorite]="isItemFavorite(video.id)"></app-list-item>
         <div id="scrollAnchor"></div>
     </div>
-
 </div>
